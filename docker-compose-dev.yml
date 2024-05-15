@@ -10,7 +10,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./data-persist-postgres:/var/lib/postgresql/data
+      - ./docker-data/postgress:/var/lib/postgresql/data
     networks:
       - postgres-network
 
