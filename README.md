@@ -38,6 +38,9 @@ make rundb
 make runserver
 ```
 
+> [!CAUTION]
+> NÃO USAR PIP INSTALL PARTA NENHUMA DEPENDÊNCIA, SOMENTE 'poetry add'
+
 Para mais comandos de uma avaliada no Makefile
 
 
