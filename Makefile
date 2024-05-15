@@ -10,31 +10,31 @@ lint:
 rundb:
 	if [hash docker-compose >/dev/null]; \
 	then \
-		sudo docker-compose -f docker-compose-devdb.yml up -d --build; \
+		sudo docker-compose -f docker-compose-dev.yml up -d --build; \
 	else \
-		sudo docker compose -f docker-compose-devdb.yml up -d --build; \
+		sudo docker compose -f docker-compose-dev.yml up -d --build; \
 	fi \
 
 stopdb:
 	if [hash docker-compose >/dev/null]; \
 	then \
-		sudo docker-compose -f  docker-compose-devdb.yml down; \
+		sudo docker-compose -f  docker-compose-dev.yml down \
 	else \
-		sudo docker compose -f  docker-compose-devdb.yml down; \
+		sudo docker compose -f  docker-compose-dev.yml down \
 	fi \
 
 runserver:
-	poetry run ./app/manage.py runserver 0.0.0.0:8000
+	python ./app/manage.py runserver 0.0.0.0:8000
 
 createsuperuser:
-	poetry run ./app/manage.py createsuperuser
+	python ./app/manage.py createsuperuser
 
 migrate:
-	poetry run ./app/manage.py migrate
+	python ./app/manage.py migrate
 
 makemigrations:
-	poetry run ./app/manage.py makemigrations
+	python ./app/manage.py makemigrations
 
 makemigrations-merge:
-	poetry run ./app/manage.py makemigrations --merge
+	python ./app/manage.py makemigrations --merge
 
