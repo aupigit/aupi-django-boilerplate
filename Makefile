@@ -8,20 +8,10 @@ lint:
 	poetry run pre-commit install && poetry run pre-commit run -a -v
 
 rundb:
-	if [hash docker-compose >/dev/null]; \
-	then \
-		sudo docker-compose -f docker-compose-dev.yml up -d --build; \
-	else \
-		sudo docker compose -f docker-compose-dev.yml up -d --build; \
-	fi \
+	sudo docker compose -f docker-compose-dev.yml up -d --build
 
 stopdb:
-	if [hash docker-compose >/dev/null]; \
-	then \
-		sudo docker-compose -f  docker-compose-dev.yml down \
-	else \
-		sudo docker compose -f  docker-compose-dev.yml down \
-	fi \
+	sudo docker compose -f  docker-compose-dev.yml down
 
 runserver:
 	poetry run ./app/manage.py runserver 0.0.0.0:8000
