@@ -24,17 +24,17 @@ stopdb:
 	fi \
 
 runserver:
-	python ./app/manage.py runserver 0.0.0.0:8000
+	poetry run ./app/manage.py runserver 0.0.0.0:8000
 
 createsuperuser:
-	python ./app/manage.py createsuperuser
+	poetry run ./app/manage.py createsuperuser
 
 migrate:
-	python ./app/manage.py migrate
+	poetry run ./app/manage.py migrate
 
 makemigrations:
-	python ./app/manage.py makemigrations
+	poetry run ./app/manage.py makemigrations
 
 makemigrations-merge:
-	python ./app/manage.py makemigrations --merge
+	poetry run ./app/manage.py makemigrations --merge
 

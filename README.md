@@ -1,82 +1,44 @@
 # Django Aupi Boilerplate
 
-Backend e backoffce do projeto estudo fácil
+Boilerplate para projetos Django da Aupi com Postgress + Django + Django Rest e Jazzmin
 
 ## PREREQUISITES
-- install [github CLI](https://cli.github.com/)
-- Install pyenv dependencies:
+Ter docker e docker composer v2 e o virtualenv
 ```bash
-sudo apt install libreadline-dev libsqlite3-dev libffi-dev libncurses5-dev zlib1g zlib1g-dev lzma liblzma-dev libbz2-dev libssl-dev python3-tk libpq-dev graphviz-dev
-```
-- Install python env with.
-```bash
-curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+sudo apt install docker-compose-v2 docker.io python3-virtualenv
 ```
 
-- Edit  ~/.bashrc and add following lines on the end of file, after that reload bash
+Criar um virtual env e ativa-lo
 ```bash
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+virtualenv venv
+source venv/bin/activate
 ```
 
-- Install Python 3.10 via PyEnvo
+Instalar o Poetry
 ```bash
-pyenv install 3.10
+pip install poetry
 ```
-- Create pyenv venv and run it
+
+Rodar as dependências
 ```bash
-pyenv shell 3.10
+poetry install
 ```
-- Install poetry
+
+rodar a primeira vez
 ```bash
-curl -sSL https://install.python-poetry.org | python3 -
+cp .env.example .env
+make runserver
 ```
-- Add to path poetry
+
 
 ## RUN PROJECT
-
-On Dev mode if you need to run Postgres and PdAdmin in docker run first
-
+Para rodar o projeto em dev você pode usar o docker de banco de dados e em seguida subir a aplicação em dev
 ```bash
-make devdb
-```
-
-On first run use commands bellow
-```bash
-pyenv shell 3.10
-poetry install
-make lint
-cp .env.example .env
-make runserver
-```
-
-After just run:
-```bash
-make runserver
-```
-
-## Important Make Commands
-
-Na primeira vez:
-```bash
-pyenv shell 3.10
-poetry install
-cp .env.example .env
-make rundb
-make migrate
-make runserver
-```
-Depois:
-```bash
-pyenv shell 3.10
-poetry install
 make rundb
 make runserver
 ```
-```
 
-More commands take a look om Makefile
+Para mais comandos de uma avaliada no Makefile
 
 
 ## HOW TO COMMIT
@@ -99,10 +61,10 @@ So, you should run make lint to enable pre-commit hooks and use black as default
 
 ## Instruções do Docker de Produção e CERTBOT
 Para colocar em produção, na primeira execução é necessário fazer a criação do SSL do letsencrypt. O passi inical é validar se o certbot está rodando, para isso rode:
-`sudo docker-compose -f docker-compose-ssl-init.yml run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d NOMEDODOMINIO.COM.BR`
+`sudo docker compose -f docker-compose-ssl-init.yml run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d NOMEDODOMINIO.COM.BR`
 
 Tendo sucesso nesta operação pode rodar o primeiro certificado com o comando:
-`sudo docker-compose -f docker-compose-ssl-init.yml run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d NOMEDODOMINIO.COM.BR`
+`sudo docker compose -f docker-compose-ssl-init.yml run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d NOMEDODOMINIO.COM.BR`
 
 TODO: Renovar o certbot
 
@@ -112,7 +74,7 @@ TODO: Renovar o certbot
 
 Criar EC2 ubunto 22.04
 Instalar git e docker
-`sudo apt install docker-compose`
+`sudo apt install docker.io docker-composer-v2`
 
 atribuir IP elático
 

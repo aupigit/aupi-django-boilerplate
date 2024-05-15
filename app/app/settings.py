@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.gis",
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
@@ -87,20 +86,17 @@ TEMPLATES = [
 WSGI_APPLICATION = "app.wsgi.application"
 
 
-def parse_postgis_db_url(db_url):
-    result = urlparse(db_url)
-    return {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": result.path[1:],
-        "USER": result.username,
-        "PASSWORD": result.password,
-        "HOST": result.hostname,
-        "PORT": result.port,
-        "TIME_ZONE": "America/Sao_Paulo",
+DATABASES = {
+    "default": {
+        "ENGINE": config("DJANGO_DB_ENGINE"),
+        "NAME": config("DJANGO_DB_NAME"),
+        "USER": config("DJANGO_DB_USER"),
+        "PASSWORD": config("DJANGO_DB_PASSWORD"),
+        "HOST": config("DJANGO_DB_HOST"),
+        "PORT": config("DJANGO_DB_PORT"),
+        "TIME_ZONE": config("DJANGO_DB_TIME_ZONE"),
     }
-
-
-DATABASES = {"default": parse_postgis_db_url(os.getenv("DATABASE_URL"))}
+}
 
 
 # Password validation
@@ -120,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-AUTH_USER_MODEL = "operation.User"
+
 
 
 REST_FRAMEWORK = {
